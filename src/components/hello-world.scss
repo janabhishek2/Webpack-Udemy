@@ -1,0 +1,16 @@
+$button-background:lightblue;
+$button-font-color:green;
+
+$text-color:pink;
+
+.btn-primary{
+    font-size:25px;
+    padding:20px;
+    background:$button-background;
+    margin:10px;
+    color:$button-font-color;
+}
+.para{
+    color:$text-color;
+    
+}
