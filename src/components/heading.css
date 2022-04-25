@@ -1,0 +1,9 @@
+.heading-class{
+    font-size:25px;
+    color:purple;
+    text-align: center;
+    border:1px solid black;
+    padding:10px;
+    margin:5px;
+    border-radius: 10px;
+}
