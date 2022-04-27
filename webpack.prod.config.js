@@ -1,16 +1,19 @@
 const path = require("path");
-const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractplugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
-  output: {
-    filename: "bundle.[contenthash].js",
-    path: path.resolve(__dirname, "./dist"),
-    publicPath: "dist/",
+  entry: {
+    "hello-world": "./src/HelloWorld.js",
+    kiwi: "./src/kiwi.js",
   },
-  mode: "none",
+  output: {
+    filename: "[name].[contenthash].js",
+    path: path.resolve(__dirname, "./dist"),
+    publicPath: "",
+  },
+  mode: "production",
   module: {
     rules: [
       { test: /\.(ttf)$/, type: "asset/resource" },
@@ -20,7 +23,7 @@ module.exports = {
         type: "asset",
         parser: {
           dataUrlCondition: {
-            maxSize: 7 * 1024, // 7Kb max size
+            maxSize: 1 * 1024, // 7Kb max size
           },
         },
       },
@@ -36,13 +39,32 @@ module.exports = {
         test: /\.(scss)$/,
         use: [MiniCssExtractplugin.loader, "css-loader", "sass-loader"],
       },
+      {
+        test: /\.(hbs)$/,
+        use: ["handlebars-loader"],
+      },
     ],
   },
   plugins: [
-    new TerserPlugin(),
     new MiniCssExtractplugin({
-      filename: "bundle.[contenthash].css",
+      filename: "[name].[contenthash].css",
     }),
     new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      filename: "hello-world.html",
+      title: "Hello World",
+      chunks: ["hello-world"],
+      template: "src/index.hbs",
+      description: "Hello World",
+      minify: "false",
+    }),
+    new HtmlWebpackPlugin({
+      filename: "kiwi.html",
+      chunks: ["kiwi"],
+      title: "Kiwi",
+      template: "src/index.hbs",
+      description: "Kiwi",
+      minify: true,
+    }),
   ],
 };
