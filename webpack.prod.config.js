@@ -7,6 +7,7 @@ module.exports = {
   entry: {
     "hello-world": "./src/HelloWorld.js",
     kiwi: "./src/kiwi.js",
+    abhishek: "./src/abhishek.js",
   },
   output: {
     filename: "[name].[contenthash].js",
@@ -14,6 +15,11 @@ module.exports = {
     publicPath: "",
   },
   mode: "production",
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
   module: {
     rules: [
       { test: /\.(ttf)$/, type: "asset/resource" },
@@ -65,6 +71,14 @@ module.exports = {
       template: "src/index.hbs",
       description: "Kiwi",
       minify: true,
+    }),
+    new HtmlWebpackPlugin({
+      filename: "abhishek.html",
+      chunks: ["abhishek"],
+      title: "abhishek",
+      template: "src/index.hbs",
+      description: "Hello Abhishek",
+      minify: false,
     }),
   ],
 };

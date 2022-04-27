@@ -1,0 +1,1 @@
+(()=>{"use strict";(new class{render(){const e=document.querySelector("body"),n=document.createElement("p");n.innerHTML="Hello Abhishek",e.appendChild(n)}}).render()})();
